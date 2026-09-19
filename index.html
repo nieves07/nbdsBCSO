@@ -6,6 +6,7 @@
         <title>BCSO - Blaine County Sheriff Office</title>
     <link rel="icon" type="image/png" href="https://uploads.onecompiler.io/44ve7ewwc/453qafdkz/image.png.7db1478909619c757936853787dffa8b.png">
     <meta name="description" content="BCSO - DDRP">
+    <meta name="theme-color" content="#0D1B2A">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -32,6 +33,12 @@
         .grid-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;opacity:.06}
         .grid-bg::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background:repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(59,130,246,.3) 80px,rgba(59,130,246,.3) 81px),repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(59,130,246,.3) 80px,rgba(59,130,246,.3) 81px);animation:gridMove 40s linear infinite}
         @keyframes gridMove{0%{transform:translate(0,0)}100%{transform:translate(80px,80px)}}
+
+        .scroll-progress{position:fixed;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold-l));box-shadow:0 0 12px rgba(59,130,246,.8);z-index:20001;transition:width .08s linear}
+        .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);transform:scale(0);animation:ripple .55s ease-out;pointer-events:none}
+        @keyframes ripple{to{transform:scale(4);opacity:0}}
+        .tilt-card{transform-style:preserve-3d;will-change:transform}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.tilt-card{transform:none!important}}
 
         /* ===== NAVBAR ===== */
         .nav{position:fixed;top:0;left:0;width:100%;z-index:999;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;transition:all .4s}
@@ -153,9 +160,11 @@
         /* ===== RANKS TIMELINE ===== */
         .timeline{position:relative;margin-top:50px;padding-left:40px}
         .timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),rgba(59,130,246,.1))}
-        .tl-item{position:relative;margin-bottom:32px;padding:20px 24px;background:var(--dark2);border:1px solid rgba(255,255,255,.05);border-radius:16px;transition:all .3s}
-        .tl-item:hover{border-color:rgba(59,130,246,.2);transform:translateX(5px)}
-        .tl-item::before{content:'';position:absolute;left:-33px;top:24px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:3px solid var(--dark);z-index:1}
+        .tl-item{position:relative;margin-bottom:32px;padding:20px 24px;background:var(--dark2);border:1px solid rgba(255,255,255,.05);border-radius:16px;transition:transform .12s ease-out,border-color .3s,background .3s;transform-style:preserve-3d;will-change:transform}
+        .tl-item:hover{border-color:rgba(59,130,246,.2)}
+        .tl-item::before{display:none}
+        .tl-row{position:relative}
+        .tl-marker{position:absolute;left:6px;top:24px;width:16px;height:16px;border-radius:50%;background:var(--accent);border:3px solid var(--dark);z-index:5;pointer-events:none;box-shadow:0 0 10px rgba(59,130,246,.35)}
         .tl-head{display:flex;justify-content:space-between;align-items:center}
         .tl-head h4{font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:1px}
         .tl-head .tl-badge{font-family:'JetBrains Mono',monospace;font-size:9px;padding:4px 10px;border-radius:20px;border:1px solid rgba(59,130,246,.3);color:var(--accent)}
@@ -259,8 +268,10 @@
     </style>
 </head>
 <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
     <div class="cursor-ring" id="cursorRing"></div>
     <div class="grid-bg"></div>
+        
 
     <!-- NAVBAR -->
     <nav class="nav" id="nav">
@@ -283,12 +294,12 @@
                 </div>
             </li>
         </ul>
-        <button class="mobile-btn" onclick="document.getElementById('mobile').classList.add('open')"><i class="fas fa-bars"></i></button>
+        <button class="mobile-btn" type="button" aria-label="Menüyü aç" aria-controls="mobile" aria-expanded="false" onclick="document.getElementById('mobile').classList.add('open');this.setAttribute('aria-expanded','true')"><i class="fas fa-bars"></i></button>
     </nav>
 
     <!-- MOBILE -->
     <div class="mobile-menu" id="mobile">
-        <button class="mobile-close" onclick="this.parentElement.classList.remove('open')"><i class="fas fa-times"></i></button>
+        <button class="mobile-close" type="button" aria-label="Menüyü kapat" onclick="this.parentElement.classList.remove('open');document.querySelector('.mobile-btn').setAttribute('aria-expanded','false')"><i class="fas fa-times"></i></button>
         <a href="#hakkimizda" onclick="this.parentElement.classList.remove('open')">Hakkimizda</a>
         <a href="#mdc" onclick="this.parentElement.classList.remove('open')">MDC Terminal</a>
         <a href="#hiyerarsi" onclick="this.parentElement.classList.remove('open')">Hiyerarsi</a>
@@ -315,7 +326,7 @@
             <div class="hero-motto">KORU <span>&amp;</span> HİZMET ET</div>
             <p class="hero-sub">Blaine County'de kamu düzeni, adalet ve güvenlik sağlamak için profesyonel kadromuzla görev başındayız.</p>
             <div class="hero-btns">
-                <a href="https://discord.gg/FNB7qERgrV" class="btn btn-accent"><i class="fab fa-discord"></i>discorda katıl</a>
+                <a href="https://discord.gg/FNB7qERgrV" target="_blank" rel="noopener noreferrer" class="btn btn-accent"><i class="fab fa-discord"></i>Discord'a katıl</a>
                 <a href="#hakkimizda" class="btn btn-glass"><i class="fas fa-info-circle"></i>Departmani Kesfet</a>
             </div>
         </div>
@@ -432,7 +443,7 @@
         <h2 class="sec-title rv">RUTBE <span style="color:var(--accent)">HIYERARSISI</span></h2>
         <p class="sec-desc rv">Departman içindeki terfi sistemi ve görev tanımları.</p>
 
-        <div class="timeline rv">
+                <div class="timeline">
             <div class="tl-item">
                 <div class="tl-head">
                     <h4>Sheriff</h4>
@@ -517,7 +528,11 @@
         <p class="sec-desc rv">Departmandan ve görevlerden kareler.</p>
 
         <div class="gal-filters rv">
-            <button class="gal-filter active" data-filter="all">Tumu</button>
+                        <button class="gal-filter active" type="button" data-filter="all">Tümü</button>
+            <button class="gal-filter" type="button" data-filter="devriye">Devriye</button>
+            <button class="gal-filter" type="button" data-filter="ekip">Ekip</button>
+            <button class="gal-filter" type="button" data-filter="arac">Araç</button>
+            <button class="gal-filter" type="button" data-filter="operasyon">Operasyon</button>
         </div>
 
         <div class="gal-grid" id="galGrid">
@@ -528,31 +543,28 @@
                 img src: HizliResim linki
             -->
             <div class="gal-item rv" data-category="devriye">
-                <img src="https://uploads.onecompiler.io/44ve7ewwc/453qafdkz/Screenshot_62.png
-" alt="Devriye">
+                                <img src="https://uploads.onecompiler.io/44ve7ewwc/453qafdkz/Screenshot_62.png" alt="Akşam devriyesi">
                 <div class="gal-info">
                     <span>Devriye</span>
                     <h4>Akşam Devriyesi</h4>
                 </div>
             </div>
             <div class="gal-item rv" data-category="ekip">
-                <img src="https://uploads.onecompiler.io/44ve7ewwc/453qafdkz/Screenshot_4.png
-
-" alt="Ekip">
+                                <img src="https://uploads.onecompiler.io/44ve7ewwc/453qafdkz/Screenshot_4.png" alt="Kadro toplantısı">
                 <div class="gal-info">
                     <span>Ekip</span>
                     <h4>Kadro Toplantisi</h4>
                 </div>
             </div>
             <div class="gal-item rv" data-category="arac">
-                <img src="https://uploads.onecompiler.io/44ve7ewwc/453qafdkz/DFG.png" alt="Arac">
+                                <img src="https://uploads.onecompiler.io/44ve7ewwc/453qafdkz/DFG.png" alt="BCSO aracı">
                 <div class="gal-info">
-                    <span>Ekip</span>
-                    <h4>Kadro Toplantisi</h4>
+                    <span>Araç</span>
+                    <h4>Devriye Aracı</h4>
                 </div>
             </div>
             <div class="gal-item rv" data-category="operasyon">
-                <img src="https://uploads.onecompiler.io/44ve7ewwc/453qafdkz/imageDFGHS.png" alt="Operasyon">
+                <img src="https://uploads.onecompiler.io/44ve7ewwc/453qafdkz/imageDFGHS.png" alt="Büyük operasyon">
                 <div class="gal-info">
                     <span>Operasyon</span>
                     <h4>Büyük Operasyon</h4>
@@ -571,8 +583,8 @@
                 <i class="fab fa-discord"></i>
                 <h3>DISCORD'A KATIL</h3>
                 <p>Departmanla iletişime geçin, başvuru yapın ve BCSO ekibine katılın.</p>
-                <a href="https://discord.gg/FNB7qERgrV" target="_blank" class="btn-discord">
-                    <i class=></i>Discord Sunucusuna Katıl
+                                <a href="https://discord.gg/FNB7qERgrV" target="_blank" rel="noopener noreferrer" class="btn-discord">
+                    <i class=""></i>Discord Sunucusuna Katıl
                 </a>
             </div>
         </div>
@@ -620,13 +632,67 @@
 
     <!-- LIGHTBOX -->
     <div class="lb" id="lightbox">
-        <button class="lb-close" onclick="closeLB()"><i class="fas fa-times"></i></button>
+        <button class="lb-close" type="button" aria-label="Galeriyi kapat" onclick="closeLB()"><i class="fas fa-times"></i></button>
         <img id="lbImg" src="" alt="">
     </div>
 
     <script>
-        // Nav scroll
-        window.addEventListener('scroll',function(){var n=document.getElementById('nav');window.scrollY>60?n.classList.add('scrolled'):n.classList.remove('scrolled')});
+                // Nav scroll, progress bar and lightweight card effects
+        function updateScrollUI(){
+            var n=document.getElementById('nav');
+            var progress=document.getElementById('scrollProgress');
+            var max=document.documentElement.scrollHeight-window.innerHeight;
+            if(n)window.scrollY>60?n.classList.add('scrolled'):n.classList.remove('scrolled');
+            if(progress)progress.style.width=(max>0?(window.scrollY/max)*100:0)+'%';
+        }
+        window.addEventListener('scroll',updateScrollUI,{passive:true});
+        updateScrollUI();
+
+        // Rütbe noktalarını kartların dışına al; böylece 3D tilt sırasında sabit kalırlar.
+        document.querySelectorAll('.timeline').forEach(function(timeline){
+            var items=timeline.querySelectorAll('.tl-item');
+            items.forEach(function(item){
+                var marker=document.createElement('span');
+                marker.className='tl-marker';
+                timeline.appendChild(marker);
+                function positionMarker(){marker.style.top=(item.offsetTop+24)+'px'}
+                positionMarker();
+                window.addEventListener('resize',positionMarker);
+            });
+        });
+
+        document.querySelectorAll('.mdc-card,.call-item,.discord-wrap,.tl-item').forEach(function(card){
+            card.classList.add('tilt-card');
+            card.addEventListener('mousemove',function(e){
+                if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+                var box=card.getBoundingClientRect();
+                var rotateX=((e.clientY-box.top)/box.height-.5)*-5;
+                var rotateY=((e.clientX-box.left)/box.width-.5)*5;
+                card.style.setProperty('--tilt-x',rotateX);
+                card.style.setProperty('--tilt-y',rotateY);
+                card.style.transform='perspective(700px) rotateX('+rotateX+'deg) rotateY('+rotateY+'deg) translateY(-3px)';
+            });
+            card.addEventListener('mouseleave',function(){
+                card.style.transform='';
+                card.style.removeProperty('--tilt-x');
+                card.style.removeProperty('--tilt-y');
+            });
+        });
+
+        document.querySelectorAll('.btn,.btn-discord,.gal-filter').forEach(function(button){
+            button.addEventListener('click',function(e){
+                var rect=button.getBoundingClientRect();
+                var ripple=document.createElement('span');
+                var size=Math.max(rect.width,rect.height);
+                ripple.className='ripple';
+                ripple.style.width=size+'px';ripple.style.height=size+'px';
+                ripple.style.left=(e.clientX-rect.left-size/2)+'px';
+                ripple.style.top=(e.clientY-rect.top-size/2)+'px';
+                button.style.position='relative';button.style.overflow='hidden';
+                button.appendChild(ripple);
+                setTimeout(function(){ripple.remove()},600);
+            });
+        });
 
         // Reveal
         var rvs=document.querySelectorAll('.rv');

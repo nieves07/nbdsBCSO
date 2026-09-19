@@ -20,7 +20,8 @@
         a,button,.gal-item{cursor:none}
         .cursor-ring{position:fixed;top:0;left:0;width:28px;height:28px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:20000;transform:translate(-50%,-50%);box-shadow:0 0 10px rgba(59,130,246,.25);animation:cursorPulse 2s ease-in-out infinite;transition:width .2s,height .2s,border-color .2s}
         .cursor-ring::after{content:'';position:absolute;top:50%;left:50%;width:5px;height:5px;border-radius:50%;background:var(--gold-l);transform:translate(-50%,-50%);box-shadow:0 0 7px rgba(244,208,63,.6)}
-        .cursor-ring.hover{width:38px;height:38px;border-color:var(--gold-l)}
+                .cursor-ring.hover{width:38px;height:38px;border-color:var(--gold-l)}
+        .cursor-ring.hidden{display:none}
         @keyframes cursorPulse{0%,100%{opacity:.75;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.18)}}
         @media(max-width:768px),(pointer:coarse){body{cursor:auto}a,button,.gal-item{cursor:pointer}.cursor-ring{display:none}}
         ::-webkit-scrollbar{width:5px}
@@ -673,16 +674,25 @@
 
                 // Mouse parallax hero and custom cursor
         var cursorRing=document.getElementById('cursorRing');
-        document.addEventListener('mousemove',function(e){
-            if(cursorRing){cursorRing.style.left=e.clientX+'px';cursorRing.style.top=e.clientY+'px'}
+                document.addEventListener('mousemove',function(e){
+            if(cursorRing){
+                cursorRing.classList.remove('hidden');
+                cursorRing.style.left=e.clientX+'px';
+                cursorRing.style.top=e.clientY+'px';
+            }
             var x=(e.clientX/window.innerWidth-.5)*5;
             var y=(e.clientY/window.innerHeight-.5)*5;
             var hero=document.querySelector('.hero-bg img');
             if(hero)hero.style.transform='scale(1.05) translate('+x+'px,'+y+'px)';
         });
-        document.querySelectorAll('a,button,.gal-item').forEach(function(el){
+                document.querySelectorAll('a,button,.gal-item').forEach(function(el){
             el.addEventListener('mouseenter',function(){if(cursorRing)cursorRing.classList.add('hover')});
             el.addEventListener('mouseleave',function(){if(cursorRing)cursorRing.classList.remove('hover')});
+        });
+        document.addEventListener('mousedown',function(e){
+            if(e.clientX >= document.documentElement.clientWidth - 20 && cursorRing){
+                cursorRing.classList.add('hidden');
+            }
         });
     </script>
 </body>

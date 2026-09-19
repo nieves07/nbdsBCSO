@@ -88,9 +88,9 @@
 
         /* ===== TICKER ===== */
         .ticker{background:var(--accent);overflow:hidden;padding:10px 0}
-        .ticker-inner{display:flex;animation:ticker 20s linear infinite;white-space:nowrap}
-        .ticker-inner span{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;color:var(--white);text-transform:uppercase;padding:0 40px}
-        @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+                .ticker-inner{display:flex;width:max-content;animation:ticker 20s linear infinite;white-space:nowrap;will-change:transform}
+        .ticker-inner span{flex:0 0 auto;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;color:var(--white);text-transform:uppercase;padding:0 40px}
+        @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
         /* ===== SECTION ===== */
         .sec{padding:100px 40px;max-width:1280px;margin:0 auto;position:relative}
@@ -329,17 +329,17 @@
     <div class="ticker">
         <div class="ticker-inner">
             <span>Blaine County Sheriff Office</span>
-            <span>Polis Roleplay Departmani</span>
             <span>Adalet & Guvenlik</span>
             <span>Profesyonel Ekip</span>
-            <span>FiveM Toplulugu</span>
-            <span>BCSO Online</span>
             <span>Blaine County Sheriff Office</span>
-            <span>Polis Roleplay Departmani</span>
             <span>Adalet & Guvenlik</span>
             <span>Profesyonel Ekip</span>
-            <span>FiveM Toplulugu</span>
-            <span>BCSO Online</span>
+            <span>Blaine County Sheriff Office</span>
+            <span>Adalet & Guvenlik</span>
+            <span>Profesyonel Ekip</span>
+            <span>Blaine County Sheriff Office</span>
+            <span>Adalet & Guvenlik</span>
+            <span>Profesyonel Ekip</span>
         </div>
     </div>
 

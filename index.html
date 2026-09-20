@@ -89,11 +89,16 @@
         .hero-motto span{color:#60a5fa;padding:0 2px;text-shadow:0 0 14px rgba(96,165,250,.7)}
         .hero-sub{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:500;letter-spacing:.4px;color:#aeb9c8;max-width:440px;line-height:1.7;margin-bottom:36px}
         .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-        .btn{padding:14px 30px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .3s;cursor:pointer;display:inline-flex;align-items:center;gap:8px;border:none;font-family:'Inter',sans-serif}
-        .btn-accent{background:var(--accent);color:var(--white)}
-        .btn-accent:hover{background:#2563EB;transform:translateY(-2px);box-shadow:0 10px 30px rgba(59,130,246,.3)}
+                .btn{position:relative;overflow:hidden;padding:14px 30px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease,color .25s ease;cursor:pointer;display:inline-flex;align-items:center;gap:8px;border:none;font-family:'Inter',sans-serif;isolation:isolate}
+        .btn::before{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.28) 50%,transparent 75%);transform:translateX(-130%);transition:transform .6s ease;z-index:-1}
+        .btn:hover::before{transform:translateX(130%)}
+        .btn:active{transform:translateY(1px) scale(.97);box-shadow:none}
+        .btn i{transition:transform .25s ease}
+        .btn:hover i{transform:translateX(2px) scale(1.08)}
+        .btn-accent{background:var(--accent);color:var(--white);box-shadow:0 6px 18px rgba(59,130,246,.2)}
+        .btn-accent:hover{background:#2563EB;transform:translateY(-3px);box-shadow:0 12px 28px rgba(59,130,246,.42)}
         .btn-glass{background:rgba(255,255,255,.06);color:var(--white);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px)}
-        .btn-glass:hover{border-color:var(--accent);color:var(--accent)}
+        .btn-glass:hover{border-color:var(--accent);color:var(--accent);background:rgba(59,130,246,.1);transform:translateY(-3px);box-shadow:0 8px 22px rgba(59,130,246,.16)}
         .hero-hud{position:absolute;right:40px;bottom:46px;z-index:2;width:220px;padding:16px;border:1px solid rgba(59,130,246,.2);border-radius:14px;background:rgba(10,14,20,.45);backdrop-filter:blur(12px);font-family:'JetBrains Mono',monospace;box-shadow:0 0 30px rgba(0,0,0,.18)}
         .hero-hud-head{display:flex;justify-content:space-between;color:var(--gray);font-size:9px;letter-spacing:1px;margin-bottom:12px}
         .hero-hud-head b{color:var(--green);font-weight:500}
@@ -215,8 +220,10 @@
         .discord-wrap .fa-discord{font-size:42px;color:#7289DA;margin-bottom:16px}
         .discord-wrap h3{font-family:'Bebas Neue',cursive;font-size:38px;letter-spacing:4px;margin-bottom:10px}
         .discord-wrap p{font-size:13px;color:#aab2c0;max-width:480px;margin:0 auto 26px;line-height:1.8}
-        .btn-discord{background:#5865F2;color:var(--white);padding:15px 34px;border-radius:50px;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:2px;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:9px;border:none;cursor:pointer;font-family:'Inter',sans-serif}
-        .btn-discord:hover{background:#4752C4;transform:translateY(-3px);box-shadow:0 12px 30px rgba(88,101,242,.4)}
+                .btn-discord{position:relative;overflow:hidden;background:#5865F2;color:var(--white);padding:15px 34px;border-radius:50px;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:2px;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease,background .25s ease;display:inline-flex;align-items:center;gap:9px;border:none;cursor:pointer;font-family:'Inter',sans-serif}
+        .btn-discord:hover{background:#4752C4;transform:translateY(-3px);box-shadow:0 12px 30px rgba(88,101,242,.48)}
+        .btn-discord:active{transform:translateY(1px) scale(.97);box-shadow:none}
+        .btn-discord i{transition:transform .25s ease}.btn-discord:hover i{transform:scale(1.1) rotate(-5deg)}
         @media(max-width:768px){.discord-section{padding:50px 20px 65px}.discord-wrap{padding:36px 22px}.discord-wrap h3{font-size:31px;letter-spacing:2px}}
 
                 /* ===== DISCLAIMER ===== */
@@ -244,12 +251,28 @@
         .lb{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:10000;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
         .lb.open{display:flex;opacity:1}
         .lb img{max-width:88%;max-height:85vh;object-fit:contain;border-radius:10px}
-        .lb-close{position:fixed;top:20px;right:24px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--white);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10001;transition:all .3s}
+                .lb-close{position:fixed;top:20px;right:24px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--white);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10001;transition:all .3s}
         .lb-close:hover{background:var(--accent);border-color:var(--accent)}
+        .lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:44px;height:44px;border:1px solid rgba(59,130,246,.35);border-radius:50%;background:rgba(10,14,20,.75);backdrop-filter:blur(10px);color:var(--white);font-size:16px;display:flex;align-items:center;justify-content:center;z-index:10001;cursor:pointer;transition:all .3s}
+        .lb-nav:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-50%) scale(1.08)}
+        .lb-prev{left:24px}.lb-next{right:24px}
+        @media(max-width:768px){.lb-nav{width:38px;height:38px}.lb-prev{left:12px}.lb-next{right:12px}}
+
+                /* ===== PAGE LOADER ===== */
+        body.is-loading{overflow:hidden}
+                .page-loader{position:fixed;inset:0;z-index:30000;display:grid;place-items:center;background:var(--dark);transition:opacity .3s ease,visibility .3s ease}
+        .page-loader.done{opacity:0;visibility:hidden;pointer-events:none}
+        .loader-core{position:relative;width:48px;height:48px}
+        .loader-ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--accent) var(--load,0%),rgba(255,255,255,.1) 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));transform:rotate(-90deg);box-shadow:0 0 10px rgba(59,130,246,.14)}
+        .loader-label{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);color:#64748b;font:600 9px 'Inter',sans-serif;letter-spacing:3px;white-space:nowrap}
+        @keyframes loaderSpin{to{transform:rotate(360deg)}}
+        @keyframes loaderPulse{0%,100%{transform:scale(.94);opacity:.45}50%{transform:scale(1.04);opacity:1}}
 
         /* ===== REVEAL ===== */
-        .rv{opacity:0;transform:translateY(28px);transition:all .6s cubic-bezier(.25,.46,.45,.94)}
-        .rv.active{opacity:1;transform:translateY(0)}
+        .rv{opacity:0;transform:translateY(38px) scale(.98);filter:blur(4px);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.7,.2,1),filter .75s ease}
+        .rv.active{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+        .rv:nth-child(2){transition-delay:.08s}.rv:nth-child(3){transition-delay:.16s}.rv:nth-child(4){transition-delay:.24s}
+        @media(prefers-reduced-motion:reduce){.page-loader{transition:none}.loader-core::before,.loader-core::after{animation:none}.rv{filter:none;transform:none;transition:opacity .2s}.rv.active{transform:none}}
 
                 /* ===== PORTAL EXTENSIONS ===== */
         .portal-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;margin-top:40px}
@@ -293,7 +316,13 @@
         }
     </style>
 </head>
-<body>
+<body class="is-loading">
+        <div class="page-loader" id="pageLoader" aria-label="Site yükleniyor">
+        <div class="loader-core">
+            <div class="loader-ring" id="loaderRing"></div>
+            <span class="loader-label">YÜKLENİYOR</span>
+        </div>
+    </div>
     <div class="scroll-progress" id="scrollProgress"></div>
     <div class="cursor-ring" id="cursorRing"></div>
         <div class="grid-bg"></div>
@@ -569,13 +598,6 @@
         </div>
         <h2 class="sec-title rv">GALERI <span style="color:var(--accent)">KOLEKSIYONU</span></h2>
         <p class="sec-desc rv">Departmandan ve görevlerden kareler.</p>
-
-        <div class="gal-filters rv">
-                        <button class="gal-filter active" type="button" data-filter="all">Tümü</button>
-            <button class="gal-filter" type="button" data-filter="devriye">Devriye</button>
-            <button class="gal-filter" type="button" data-filter="ekip">Ekip</button>
-            <button class="gal-filter" type="button" data-filter="arac">Araç</button>
-            <button class="gal-filter" type="button" data-filter="operasyon">Operasyon</button>
         </div>
 
                 <div class="gal-grid" id="galGrid">
@@ -676,12 +698,28 @@
     </footer>
 
     <!-- LIGHTBOX -->
-    <div class="lb" id="lightbox">
+        <div class="lb" id="lightbox">
         <button class="lb-close" type="button" aria-label="Galeriyi kapat" onclick="closeLB()"><i class="fas fa-times"></i></button>
+        <button class="lb-nav lb-prev" type="button" id="lbPrev" aria-label="Önceki görsel"><i class="fas fa-chevron-left"></i></button>
         <img id="lbImg" src="" alt="">
+        <button class="lb-nav lb-next" type="button" id="lbNext" aria-label="Sonraki görsel"><i class="fas fa-chevron-right"></i></button>
     </div>
 
-    <script>
+        <script>
+        // Tema uyumlu açılış yükleme ekranı
+        (function(){
+            var loader=document.getElementById('pageLoader');
+            var ring=document.getElementById('loaderRing');
+            var value=0;
+            function updateLoader(){
+                value=Math.min(value+2.5,100);
+                if(ring)ring.style.setProperty('--load',value+'%');
+                if(value<100){setTimeout(updateLoader,24)}
+                else{setTimeout(function(){if(loader)loader.classList.add('done');document.body.classList.remove('is-loading')},180)}
+            }
+            window.addEventListener('load',function(){setTimeout(updateLoader,180)});
+        })();
+
                 // Nav scroll, progress bar and lightweight card effects
                 function updateScrollUI(){
             var n=document.getElementById('nav');
@@ -810,7 +848,9 @@
         var galleryItems=[].slice.call(document.querySelectorAll('.gal-item')),galleryIndex=0;
         function openGalleryAt(index){if(!galleryItems.length)return;galleryIndex=(index+galleryItems.length)%galleryItems.length;var image=galleryItems[galleryIndex].querySelector('img');document.getElementById('lbImg').src=image.src;document.getElementById('lbImg').alt=image.alt;lb.classList.add('open');document.body.style.overflow='hidden';var counter=document.getElementById('galCounter');if(counter)counter.textContent=(galleryIndex+1)+' / '+galleryItems.length}
         galleryItems.forEach(function(item,index){item.addEventListener('click',function(){openGalleryAt(index)})});
-        document.getElementById('galPrev').addEventListener('click',function(){openGalleryAt(galleryIndex-1)});document.getElementById('galNext').addEventListener('click',function(){openGalleryAt(galleryIndex+1)});
+                document.getElementById('galPrev').addEventListener('click',function(){openGalleryAt(galleryIndex-1)});document.getElementById('galNext').addEventListener('click',function(){openGalleryAt(galleryIndex+1)});
+        document.getElementById('lbPrev').addEventListener('click',function(){openGalleryAt(galleryIndex-1)});
+        document.getElementById('lbNext').addEventListener('click',function(){openGalleryAt(galleryIndex+1)});
         document.addEventListener('keydown',function(e){if(lb.classList.contains('open')&&(e.key==='ArrowLeft'||e.key==='ArrowRight'))openGalleryAt(galleryIndex+(e.key==='ArrowRight'?1:-1))});
 
                 // Mouse parallax hero and custom cursor

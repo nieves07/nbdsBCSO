@@ -76,9 +76,12 @@
         .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,14,20,.95) 40%,rgba(10,14,20,.5) 100%)}
         .hero-scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(59,130,246,.02) 2px,rgba(59,130,246,.02) 4px);pointer-events:none;z-index:1}
         .hero-content{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 40px;width:100%}
-        .hero-badge{display:inline-flex;align-items:center;gap:10px;padding:6px 16px;border:1px solid rgba(59,130,246,.3);border-radius:50px;margin-bottom:24px;background:rgba(59,130,246,.06)}
+                .hero-badge{display:inline-flex;align-items:center;gap:10px;padding:6px 16px;border:1px solid rgba(59,130,246,.3);border-radius:50px;margin-bottom:14px;background:rgba(59,130,246,.06)}
         .hero-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite}
         .hero-badge span{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:4px;color:var(--accent);text-transform:uppercase}
+        .hero-visits{display:inline-flex;align-items:center;gap:8px;margin:0 0 24px;padding:7px 13px;border:1px solid rgba(212,175,55,.28);border-radius:5px;background:rgba(212,175,55,.07);color:#d9c27a;font:10px 'JetBrains Mono',monospace;letter-spacing:.7px}
+        .hero-visits i{color:var(--gold);font-size:11px}
+        .hero-visits strong{color:var(--white);font-weight:700}
         .hero-dept{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:8px;color:var(--accent);margin-bottom:12px;text-transform:uppercase}
         .hero-title{font-family:'Bebas Neue',cursive;font-size:clamp(60px,12vw,150px);line-height:.85;letter-spacing:4px;margin-bottom:20px}
         .hero-title .blue{color:var(--accent)}
@@ -413,9 +416,14 @@
         </div>
         <div class="hero-scan"></div>
         <div class="hero-content">
-            <div class="hero-badge">
+                        <div class="hero-badge">
                 <div class="dot"></div>
                 <span>DDRP ROLEPLAY</span>
+            </div>
+            <div class="hero-visits" aria-live="polite">
+                <i class="fas fa-eye"></i>
+                <span>Site ziyaretleri:</span>
+                <strong id="heroVisitCount">--</strong>
             </div>
             <div class="hero-dept">Blaine County Sheriff Office</div>
                         <h1 class="hero-title">
@@ -514,7 +522,7 @@
                         <div class="lbl">Acik Gorev</div>
                         <div class="status alert">Devam Ediyor</div>
                     </div>
-                    <div class="mdc-card">
+                                        <div class="mdc-card">
                         <div class="val" data-target="834">0</div>
                         <div class="lbl">Toplam Gorev</div>
                         <div class="status online">Tamamlandi</div>
@@ -977,6 +985,19 @@ const supabaseClient = window.supabase.createClient(
                 cursorRing.classList.add('hidden');
             }
         });
+
+                // Ziyaret sayacı: artış işlemi Supabase tarafındaki RPC fonksiyonuyla atomik yapılır.
+        async function registerSiteVisit(){
+            var heroCounter=document.getElementById('heroVisitCount');
+            if(!heroCounter)return;
+            var result=await supabaseClient.rpc('increment_site_visits');
+            if(!result.error&&result.data!==null){
+                heroCounter.textContent=Number(result.data).toLocaleString('tr-TR');
+            }else{
+                heroCounter.textContent='—';
+            }
+        }
+        registerSiteVisit();
 
         // Soygun arsivi: kayitlar herkese acik, yazma islemleri Supabase RLS ile adminlere aciktir.
         var robberyGrid=document.getElementById('robberyGrid');

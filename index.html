@@ -212,6 +212,42 @@
         .feed-text p{font-size:11px;color:var(--gray)}
         .feed-time{font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;white-space:nowrap;align-self:center}
 
+        /* ===== ROBBERY ARCHIVE ===== */
+        .robbery-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:38px}
+        .robbery-stat{padding:18px 12px;text-align:center;background:var(--dark2);border:1px solid rgba(255,255,255,.06);border-radius:15px}
+        .robbery-stat strong{display:block;font:34px 'Bebas Neue',cursive;color:var(--accent);line-height:1}
+        .robbery-stat span{display:block;margin-top:7px;color:var(--gray);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+        .robbery-stat.win-stat strong{color:var(--green)}.robbery-stat.lose-stat strong{color:var(--red)}
+        .robbery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:28px}
+        .robbery-card{background:var(--dark2);border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden;transition:transform .3s,border-color .3s}
+        .robbery-card:hover{transform:translateY(-5px);border-color:rgba(59,130,246,.35)}
+        .robbery-card.is-win{border-top:2px solid var(--green)}.robbery-card.is-lose{border-top:2px solid var(--red)}
+        .robbery-card>img{width:100%;height:165px;display:block;object-fit:cover;background:var(--dark3)}
+        .robbery-body{padding:17px}.robbery-body h3{font:23px 'Bebas Neue',cursive;letter-spacing:1px;margin:9px 0 7px}
+        .robbery-body p{color:#aeb9c8;font:500 14px 'Rajdhani',sans-serif;line-height:1.5;margin-bottom:8px}
+        .robbery-location{color:var(--accent)!important;font:11px 'JetBrains Mono',monospace!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .robbery-location i{margin-right:5px}.robbery-date{color:#586579;font:9px 'JetBrains Mono',monospace}
+        .robbery-result{display:inline-flex;align-items:center;gap:6px;font:700 9px 'JetBrains Mono',monospace;letter-spacing:1px}
+        .is-win .robbery-result{color:var(--green)}.is-lose .robbery-result{color:var(--red)}
+        .result-dot{width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
+        .admin-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:28px}
+                .admin-status{display:none;color:var(--gray);font:10px 'JetBrains Mono',monospace;margin-left:auto}
+        .admin-status.admin-active{display:block;color:var(--green);padding:8px 12px;border:1px solid rgba(34,197,94,.35);border-radius:20px;background:rgba(34,197,94,.08);box-shadow:0 0 18px rgba(34,197,94,.12)}
+        .admin-status.admin-active i{margin-right:5px}
+        .admin-box{margin-top:20px;padding:22px;background:var(--dark2);border:1px solid rgba(59,130,246,.18);border-radius:16px}
+        .admin-box[hidden]{display:none}.admin-box h3{font:24px 'Bebas Neue',cursive;letter-spacing:2px;margin-bottom:15px}
+        .login-modal{position:fixed;inset:0;z-index:12000;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.78);backdrop-filter:blur(10px)}
+        .login-modal[hidden]{display:none}.login-card{width:min(100%,390px);padding:26px;background:var(--dark2);border:1px solid rgba(59,130,246,.3);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+        .login-card h3{font:26px 'Bebas Neue',cursive;letter-spacing:2px;margin-bottom:18px}.login-card input{width:100%;padding:12px 14px;margin-bottom:11px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(255,255,255,.04);color:var(--white);font:12px 'Inter',sans-serif;outline:none}.login-card input:focus{border-color:var(--accent)}.login-actions{display:flex;gap:10px}.login-error{min-height:17px;margin:2px 0 10px;color:var(--red);font:10px 'JetBrains Mono',monospace}
+        .admin-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.admin-form textarea{min-height:90px;resize:vertical;grid-column:1/-1}
+                .admin-form input,.admin-form textarea,.admin-form select{width:100%;padding:12px 14px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(255,255,255,.04);color:var(--white);font:12px 'Inter',sans-serif;outline:none}
+        .admin-form input:focus,.admin-form textarea:focus,.admin-form select:focus{border-color:var(--accent)}.admin-form select option{background:var(--dark2)}
+        .image-preview{display:none;grid-column:1/-1;max-width:260px;max-height:150px;border:1px solid rgba(59,130,246,.3);border-radius:10px;object-fit:cover;background:var(--dark3);box-shadow:0 8px 20px rgba(0,0,0,.25)}
+        .image-preview.visible{display:block}
+        .form-message{grid-column:1/-1;color:var(--gold-l);font:11px 'JetBrains Mono',monospace;min-height:16px}.form-message.error{color:var(--red)}
+        .card-actions{display:flex;gap:8px;margin-top:13px}.card-actions button{padding:7px 10px;border:1px solid rgba(255,255,255,.1);border-radius:8px;background:transparent;color:var(--gray);font-size:10px;cursor:pointer}.card-actions button:hover{border-color:var(--accent);color:var(--accent)}
+        @media(max-width:768px){.robbery-stats{grid-template-columns:repeat(2,1fr)}.admin-form{grid-template-columns:1fr}.admin-form textarea,.form-message{grid-column:auto}.admin-status{width:100%;margin-left:0}}
+
         /* ===== DISCORD ===== */
                 .discord-section{text-align:center;padding:70px 40px 90px;max-width:1280px;margin:0 auto}
         .discord-wrap{max-width:760px;margin:0 auto;padding:44px 50px;border:1px solid rgba(88,101,242,.3);border-radius:24px;background:linear-gradient(135deg,rgba(88,101,242,.12),rgba(17,24,39,.7));box-shadow:0 18px 50px rgba(0,0,0,.25);position:relative;overflow:hidden}
@@ -316,6 +352,7 @@
             a,button,.gal-item{cursor:auto!important}
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="is-loading">
         <div class="page-loader" id="pageLoader" aria-label="Site yükleniyor">
@@ -344,7 +381,8 @@
             <li><a href="#hakkimizda">Hakkimizda</a></li>
             <li><a href="#mdc">TERMİNAL</a></li>
             <li><a href="#hiyerarsi">Hiyerarsi</a></li>
-                                    <li><a href="#galeri">Galeri</a></li>
+                                            <li><a href="#galeri">Galeri</a></li>
+                        <li><a href="#soygunlar">Soygunlar</a></li>
                         <li><a href="#kadro">Kadro</a></li>
                         <li>
                 <div class="nav-live">
@@ -362,7 +400,8 @@
         <a href="#hakkimizda" onclick="this.parentElement.classList.remove('open')">Hakkimizda</a>
         <a href="#mdc" onclick="this.parentElement.classList.remove('open')">MDC Terminal</a>
         <a href="#hiyerarsi" onclick="this.parentElement.classList.remove('open')">Hiyerarsi</a>
-                        <a href="#galeri" onclick="this.parentElement.classList.remove('open')">Galeri</a>
+                                <a href="#galeri" onclick="this.parentElement.classList.remove('open')">Galeri</a>
+        <a href="#soygunlar" onclick="this.parentElement.classList.remove('open')">Soygunlar</a>
         <a href="https://discord.gg/FNB7qERgrV" target="_blank" class="btn btn-accent">Discord</a>
     </div>
 
@@ -643,6 +682,59 @@
 
     
 
+    <!-- SOYGUN ARSIVI -->
+    <div class="sec-divider"></div>
+    <section class="sec" id="soygunlar">
+        <div class="sec-label rv"><div class="line"></div><span>Operasyon Kayitlari</span></div>
+        <h2 class="sec-title rv">SOYGUN <span style="color:var(--accent)">ARSIVI</span></h2>
+        <p class="sec-desc rv">Gerçekleşen operasyonlar, sonuçları ve görev konumları.</p>
+
+        <div class="robbery-stats rv">
+            <div class="robbery-stat"><strong id="robberyTotal">0</strong><span>Toplam Soygun</span></div>
+            <div class="robbery-stat win-stat"><strong id="robberyWins">0</strong><span>Kazanilan</span></div>
+            <div class="robbery-stat lose-stat"><strong id="robberyLosses">0</strong><span>Kaybedilen</span></div>
+                        <div class="robbery-stat win-stat"><strong id="robberyWinRate">0% / 0%</strong><span>W / L Yuzdesi</span></div>
+        </div>
+
+        <div class="admin-tools">
+            <button class="btn btn-glass" id="adminLoginBtn" type="button"><i class="fas fa-lock"></i>Admin Girisi</button>
+            <button class="btn btn-accent" id="addRobberyBtn" type="button" hidden><i class="fas fa-plus"></i>Soygun Ekle</button>
+            <button class="btn btn-glass" id="adminLogoutBtn" type="button" hidden><i class="fas fa-right-from-bracket"></i>Cikis</button>
+                        <span class="admin-status" id="adminStatus" aria-live="polite"><i class="fas fa-shield-halved"></i> ADMIN MODU AKTİF</span>
+        </div>
+
+        <div class="login-modal" id="loginModal" hidden>
+            <form class="login-card" id="loginForm">
+                <h3>ADMIN GİRİŞİ</h3>
+                <input id="loginEmail" type="email" placeholder="Admin e-posta adresi" autocomplete="username" required>
+                <input id="loginPassword" type="password" placeholder="Admin şifresi" autocomplete="current-password" required>
+                <div class="login-error" id="loginError" aria-live="polite"></div>
+                <div class="login-actions">
+                    <button class="btn btn-accent" type="submit"><i class="fas fa-lock-open"></i>Giriş Yap</button>
+                    <button class="btn btn-glass" id="cancelLoginBtn" type="button">İptal</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="admin-box" id="adminBox" hidden>
+            <h3 id="robberyFormTitle">Yeni Soygun Kaydi</h3>
+            <form class="admin-form" id="robberyForm">
+                <input id="robberyTitle" type="text" placeholder="Soygun basligi" maxlength="100" required>
+                <input id="robberyLocation" type="text" placeholder="Konum / sokak" maxlength="120" required>
+                <textarea id="robberyDescription" placeholder="Soygun aciklamasi" maxlength="1000" required></textarea>
+                <select id="robberyOutcome" required><option value="win">Kazanildi</option><option value="lose">Kaybedildi</option></select>
+                <input id="robberyDate" type="datetime-local">
+                                <input id="robberyImage" type="file" accept="image/png,image/jpeg,image/webp">
+                <img id="robberyImagePreview" class="image-preview" alt="Görsel önizlemesi">
+                <input id="robberyEditId" type="hidden">
+                <div class="form-message" id="robberyFormMessage"></div>
+                <button class="btn btn-accent" type="submit"><i class="fas fa-save"></i>Kaydet</button>
+                <button class="btn btn-glass" id="cancelRobberyBtn" type="button">Iptal</button>
+            </form>
+        </div>
+        <div class="robbery-grid" id="robberyGrid"><p class="sec-desc">Soygun kayitlari yukleniyor...</p></div>
+    </section>
+
     <!-- DISCORD -->
     <div class="sec-divider"></div>
         <section class="discord-section" id="discord">
@@ -707,6 +799,15 @@
     </div>
 
         <script>
+            const SUPABASE_URL = 'https://hwcebauyenwalhdevzpv.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh3Y2ViYXV5ZW53YWxoZGV2enB2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxNzY0NDksImV4cCI6MjEwNTc1MjQ0OX0.EgKfn7rHL8Cw-o4AvEU5rIFECd7W0nXraS2fdyPwQPg';
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
+
+            
         // Tema uyumlu açılış yükleme ekranı
         (function(){
             var loader=document.getElementById('pageLoader');
@@ -871,11 +972,101 @@
             el.addEventListener('mouseenter',function(){if(cursorRing)cursorRing.classList.add('hover')});
             el.addEventListener('mouseleave',function(){if(cursorRing)cursorRing.classList.remove('hover')});
         });
-        document.addEventListener('mousedown',function(e){
+                document.addEventListener('mousedown',function(e){
             if(e.clientX >= document.documentElement.clientWidth - 20 && cursorRing){
                 cursorRing.classList.add('hidden');
             }
         });
+
+        // Soygun arsivi: kayitlar herkese acik, yazma islemleri Supabase RLS ile adminlere aciktir.
+        var robberyGrid=document.getElementById('robberyGrid');
+        var robberyForm=document.getElementById('robberyForm');
+        var adminBox=document.getElementById('adminBox');
+        var adminLoginBtn=document.getElementById('adminLoginBtn');
+        var addRobberyBtn=document.getElementById('addRobberyBtn');
+        var adminLogoutBtn=document.getElementById('adminLogoutBtn');
+                var adminStatus=document.getElementById('adminStatus');
+        var loginModal=document.getElementById('loginModal');
+        var loginForm=document.getElementById('loginForm');
+        var loginError=document.getElementById('loginError');
+        var robberyFormMessage=document.getElementById('robberyFormMessage');
+        var adminUser=null;
+        var robberyCache=[];
+
+        function safeHtml(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]})}
+        function dateText(value){return value?new Date(value).toLocaleString('tr-TR',{dateStyle:'medium',timeStyle:'short'}):'Tarih belirtilmedi'}
+        function setFormMessage(text,isError){if(robberyFormMessage){robberyFormMessage.textContent=text;robberyFormMessage.classList.toggle('error',!!isError)}}
+
+                function updateRobberyStats(list){
+            var total=list.length,wins=list.filter(function(x){return x.outcome==='win'}).length,losses=total-wins;
+            var winRate=total?Math.round(wins/total*100):0;
+            var loseRate=total?Math.round(losses/total*100):0;
+            [['robberyTotal',total],['robberyWins',wins],['robberyLosses',losses],['robberyWinRate',winRate+'% / '+loseRate+'%']].forEach(function(pair){var el=document.getElementById(pair[0]);if(el)el.textContent=pair[1]});
+        }
+        function renderRobberies(list){
+            if(!robberyGrid)return; updateRobberyStats(list);
+            if(!list.length){robberyGrid.innerHTML='<p class="sec-desc">Henuz soygun kaydi bulunmuyor.</p>';return}
+            robberyGrid.innerHTML=list.map(function(item){var win=item.outcome==='win';return '<article class="robbery-card '+(win?'is-win':'is-lose')+'"><img src="'+safeHtml(item.image_url||'')+'" alt="'+safeHtml(item.title)+'" loading="lazy"><div class="robbery-body"><div class="robbery-result"><span class="result-dot"></span>'+(win?'KAZANILDI':'KAYBEDILDI')+'</div><h3>'+safeHtml(item.title)+'</h3><p class="robbery-location"><i class="fas fa-location-dot"></i>'+safeHtml(item.location)+'</p><p>'+safeHtml(item.description)+'</p><time class="robbery-date">'+dateText(item.occurred_at)+'</time>'+(adminUser?'<div class="card-actions"><button type="button" data-edit="'+item.id+'">Duzenle</button><button type="button" data-delete="'+item.id+'">Sil</button></div>':'')+'</div></article>'}).join('');
+        }
+        async function loadRobberies(){
+            var result=await supabaseClient.from('robberies').select('*').order('occurred_at',{ascending:false});
+            if(result.error){if(robberyGrid)robberyGrid.innerHTML='<p class="sec-desc">Kayitlar yuklenemedi: '+safeHtml(result.error.message)+'</p>';return}
+            robberyCache=result.data||[];renderRobberies(robberyCache);
+        }
+        async function refreshAdmin(){
+            var result=await supabaseClient.auth.getUser(); adminUser=null;
+            if(result.data&&result.data.user){var profile=await supabaseClient.from('profiles').select('role').eq('id',result.data.user.id).maybeSingle();if(profile.data&&profile.data.role==='admin')adminUser=result.data.user}
+            adminLoginBtn.hidden=!!adminUser;addRobberyBtn.hidden=!adminUser;adminLogoutBtn.hidden=!adminUser;
+            adminStatus.classList.toggle('admin-active',!!adminUser);
+            adminStatus.innerHTML=adminUser?'<i class="fas fa-shield-halved"></i> ADMIN MODU AKTİF':'';
+            if(loginModal)loginModal.hidden=true;
+            renderRobberies(robberyCache);
+        }
+                        adminLoginBtn.addEventListener('click',function(){
+            if(loginError)loginError.textContent='';
+            if(loginForm)loginForm.reset();
+            if(loginModal)loginModal.hidden=false;
+            var emailInput=document.getElementById('loginEmail');
+            if(emailInput)emailInput.focus();
+        });
+        if(loginForm)loginForm.addEventListener('submit',async function(e){
+            e.preventDefault();
+            var email=document.getElementById('loginEmail').value.trim();
+            var password=document.getElementById('loginPassword').value;
+            if(loginError)loginError.textContent='Giriş yapılıyor...';
+            try{
+                var result=await supabaseClient.auth.signInWithPassword({email:email,password:password});
+                if(result.error){if(loginError)loginError.textContent=result.error.message;return}
+                await refreshAdmin();
+            }catch(error){
+                if(loginError)loginError.textContent='Supabase bağlantısı kurulamadı: '+error.message;
+            }
+        });
+        document.getElementById('cancelLoginBtn').addEventListener('click',function(){if(loginModal)loginModal.hidden=true});
+        if(loginModal)loginModal.addEventListener('click',function(e){if(e.target===loginModal)loginModal.hidden=true});
+        adminLogoutBtn.addEventListener('click',async function(){await supabaseClient.auth.signOut();adminBox.hidden=true;robberyForm.reset();await refreshAdmin()});
+        addRobberyBtn.addEventListener('click',function(){robberyForm.reset();document.getElementById('robberyEditId').value='';document.getElementById('robberyFormTitle').textContent='Yeni Soygun Kaydi';setFormMessage('');adminBox.hidden=false;adminBox.scrollIntoView({behavior:'smooth',block:'center'})});
+                document.getElementById('cancelRobberyBtn').addEventListener('click',function(){adminBox.hidden=true;robberyForm.reset();clearImagePreview()});
+        var robberyImageInput=document.getElementById('robberyImage');
+        var robberyImagePreview=document.getElementById('robberyImagePreview');
+        function clearImagePreview(){if(robberyImagePreview){robberyImagePreview.removeAttribute('src');robberyImagePreview.classList.remove('visible')}}
+        if(robberyImageInput)robberyImageInput.addEventListener('change',function(){
+            var file=this.files&&this.files[0];
+            if(!file){clearImagePreview();return}
+            if(robberyImagePreview){robberyImagePreview.src=URL.createObjectURL(file);robberyImagePreview.classList.add('visible')}
+        });
+        robberyForm.addEventListener('submit',async function(e){
+            e.preventDefault();if(!adminUser)return;setFormMessage('Kaydediliyor...');
+            var editId=document.getElementById('robberyEditId').value,title=document.getElementById('robberyTitle').value.trim(),location=document.getElementById('robberyLocation').value.trim(),description=document.getElementById('robberyDescription').value.trim(),outcome=document.getElementById('robberyOutcome').value,dateValue=document.getElementById('robberyDate').value,file=document.getElementById('robberyImage').files[0],imageUrl=null;
+            if(!title||!location||!description){setFormMessage('Baslik, aciklama ve konum zorunludur.',true);return}
+            if(file){if(file.size>5*1024*1024){setFormMessage('Gorsel 5 MB\'dan kucuk olmali.',true);return}var ext=(file.name.split('.').pop()||'jpg').toLowerCase(),path=adminUser.id+'/'+crypto.randomUUID()+'.'+ext,upload=await supabaseClient.storage.from('robbery-images').upload(path,file,{cacheControl:'3600',upsert:false});if(upload.error){setFormMessage(upload.error.message,true);return}imageUrl=supabaseClient.storage.from('robbery-images').getPublicUrl(path).data.publicUrl}
+            var payload={title:title,location:location,description:description,outcome:outcome,occurred_at:dateValue?new Date(dateValue).toISOString():new Date().toISOString()};if(imageUrl)payload.image_url=imageUrl;
+            var result=editId?await supabaseClient.from('robberies').update(payload).eq('id',editId):await supabaseClient.from('robberies').insert(Object.assign(payload,{created_by:adminUser.id}));
+            if(result.error){setFormMessage(result.error.message,true);return}setFormMessage('Kayit basariyla kaydedildi.');robberyForm.reset();document.getElementById('robberyEditId').value='';setTimeout(function(){adminBox.hidden=true},500);await loadRobberies();
+        });
+        robberyGrid.addEventListener('click',async function(e){var edit=e.target.closest('[data-edit]'),del=e.target.closest('[data-delete]');if(edit){var item=robberyCache.find(function(x){return x.id===edit.dataset.edit});if(!item)return;document.getElementById('robberyEditId').value=item.id;document.getElementById('robberyTitle').value=item.title;document.getElementById('robberyLocation').value=item.location;document.getElementById('robberyDescription').value=item.description;document.getElementById('robberyOutcome').value=item.outcome;document.getElementById('robberyFormTitle').textContent='Soygun Kaydini Duzenle';adminBox.hidden=false;adminBox.scrollIntoView({behavior:'smooth',block:'center'})}if(del&&confirm('Bu soygun kaydi silinsin mi?')){var result=await supabaseClient.from('robberies').delete().eq('id',del.dataset.delete);if(result.error)alert(result.error.message);else loadRobberies()}});
+        loadRobberies().then(refreshAdmin);
+        supabaseClient.channel('robbery-live-updates').on('postgres_changes',{event:'*',schema:'public',table:'robberies'},function(){loadRobberies()}).subscribe();
     </script>
 </body>
 </html>
